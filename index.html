@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sampson Anaba · Backend engineer</title>
+    <meta
+      name="description"
+      content="Sampson Anaba builds backends you can watch work: multi-tenant APIs, AI guardrails and audit trails. Prev. Morgan Stanley and Intuit Credit Karma."
+    />
+    <meta name="theme-color" content="#f7f7f4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e0f14" media="(prefers-color-scheme: dark)" />
+    <meta property="og:title" content="Sampson Anaba · Backend you can watch work" />
+    <meta
+      property="og:description"
+      content="Multi-tenant APIs, AI guardrails and audit trails, built so you can see them work."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yine-eng.github.io/" />
+    <link rel="canonical" href="https://yine-eng.github.io/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // Set the theme before first paint so there is no flash of the wrong colors.
+      ;(function () {
+        var theme
+        try {
+          theme = localStorage.getItem('theme')
+        } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+        document.documentElement.dataset.theme = theme
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
