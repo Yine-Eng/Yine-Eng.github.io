@@ -1,0 +1,231 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+
+/*
+ * Two themes, one set of tokens. Light is the default; [data-theme='dark'] on <html>
+ * switches every token at once (set before first paint by the script in index.html).
+ */
+:root {
+  --bg: #f7f7f4;
+  --ink: #111114;
+  --muted: #45454d;
+  --card: #ffffff;
+  --line: #111114;
+  --shadow: #111114;
+  --accent-text: #1f4bff;
+  --ok: #137a3f;
+  --marquee-bg: #111114;
+  --marquee-ink: #f7f7f4;
+  --marquee-star: #ffd84d;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0e0f14;
+  --ink: #f2f2ee;
+  --muted: #a9adbc;
+  --card: #181a23;
+  --line: #f2f2ee;
+  --shadow: #1f4bff;
+  --accent-text: #8ba2ff;
+  --ok: #5fd38d;
+  --marquee-bg: #ffd84d;
+  --marquee-ink: #111114;
+  --marquee-star: #1f4bff;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-accent: #1f4bff;
+  --color-accent-text: var(--accent-text);
+  --color-ok: var(--ok);
+  --color-sun: #ffd84d;
+  --color-mint: #c9f2d6;
+  --color-peach: #ffe3cc;
+  --color-lilac: #dce4ff;
+  --color-tangerine: #ff7a1a;
+  --color-console: #12151c;
+  --font-display: 'Space Grotesk Variable', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    transition:
+      background-color 200ms ease,
+      color 200ms ease;
+  }
+
+  :focus-visible {
+    outline: 3px solid #1f4bff;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: #ffd84d;
+    color: #111114;
+  }
+}
+
+@layer components {
+  .pop-card {
+    background: var(--card);
+    border: 3px solid var(--line);
+    border-radius: 1.5rem;
+    box-shadow: 8px 8px 0 var(--shadow);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .pop-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 11px 11px 0 var(--shadow);
+  }
+
+  .pill {
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    padding: 0.5rem 1.1rem;
+    font-weight: 500;
+    transition:
+      background-color 150ms ease,
+      color 150ms ease;
+  }
+
+  .pill:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #1f4bff;
+    color: #ffffff;
+    font-weight: 600;
+    border: 3px solid var(--line);
+    border-radius: 999px;
+    padding: 0.85rem 1.6rem;
+    box-shadow: 5px 5px 0 var(--shadow);
+    transition:
+      transform 150ms ease,
+      box-shadow 150ms ease;
+  }
+
+  .btn-primary:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--shadow);
+  }
+
+  .btn-primary:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 var(--shadow);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--card);
+    color: var(--ink);
+    font-weight: 600;
+    border: 3px solid var(--line);
+    border-radius: 999px;
+    padding: 0.85rem 1.6rem;
+  }
+
+  .sticker {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: #111114;
+    border: 2px solid var(--line);
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.7rem;
+  }
+
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #111114;
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+.animate-bob {
+  animation: bob 5s ease-in-out infinite;
+}
+
+.animate-step-in {
+  animation: step-in 260ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
